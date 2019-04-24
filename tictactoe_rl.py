@@ -8,21 +8,21 @@ class TicTacToe:
         self.playerX_turn = True
 
     def display_board(self):
-        print '     |     |     '
-        print '  %s  |  %s  |  %s  ' % (self.board[0],
+        print('     |     |     ')
+        print('  {}  |  {}  |  {}  '.format(self.board[0],
                                         self.board[1],
-                                        self.board[2])
-        print '_____|_____|_____'
-        print '     |     |     '
-        print '  %s  |  %s  |  %s  ' % (self.board[3],
+                                        self.board[2]))
+        print ('_____|_____|_____')
+        print ('     |     |     ')
+        print ('  {}  |  {}  |  {} '.format(self.board[3],
                                         self.board[4],
-                                        self.board[5])
-        print '_____|_____|_____'
-        print '     |     |     '
-        print '  %s  |  %s  |  %s  ' % (self.board[6],
+                                        self.board[5]))
+        print('_____|_____|_____')
+        print('     |     |     ')
+        print('  {}  |  {}  |  {}  '.format(self.board[6],
                                         self.board[7],
-                                        self.board[8])
-        print '     |     |     '
+                                        self.board[8]))
+        print('     |     |     ')
 
     def board_full(self):
         return not any([space == ' ' for space in self.board])
@@ -38,7 +38,7 @@ class TicTacToe:
 
     def play_game(self, train=True):
         if not train:
-            print '\nNew game!'
+            print('\nNew game!')
 
         self.playerX.start_game()
         self.playerO.start_game()
@@ -59,7 +59,7 @@ class TicTacToe:
                 other_player.reward(-1, self.board)
                 if not train:
                     self.display_board()
-                    print char + ' wins!'
+                    print(char + ' wins!')
                 break
 
             if self.board_full():
@@ -67,7 +67,7 @@ class TicTacToe:
                 other_player.reward(0.5, self.board)
                 if not train:
                     self.display_board()
-                    print 'Draw!'
+                    print('Draw!')
                 break
 
             other_player.reward(0, self.board)
@@ -82,7 +82,7 @@ class Player(object):
         pass
 
     def move(self, board):
-        return int(raw_input('Your move? '))
+        return int(input('Your move? '))
 
     def available_moves(self, board):
         return [i + 1 for i in range(0, 9) if board[i] == ' ']
@@ -149,7 +149,7 @@ class QLearningPlayer(Player):
 p1 = QLearningPlayer()
 p2 = QLearningPlayer()
 
-for i in xrange(0, 20000):
+for i in range(0, 20000):
     t = TicTacToe(p1, p2)
     t.play_game()
 
@@ -161,4 +161,4 @@ while True:
     t.play_game(train=False)
 
     for each in p1.q:
-        print each, p1.q[each]
+        print(each, p1.q[each])
